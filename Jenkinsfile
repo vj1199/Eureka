@@ -18,9 +18,11 @@ pipeline {
 
         stage('Build Spring Boot App') {
             steps {
-                // Compiles your Java code and creates the .jar file in the target/ folder
-                // Note: If Jenkins is on Windows, change 'sh' to 'bat'
-                sh 'mvn clean package -DskipTests'
+                // Make the Maven wrapper executable
+                sh 'chmod +x mvnw'
+                
+                // Use the wrapper to build the project
+                sh './mvnw clean package -DskipTests'
             }
         }
 
